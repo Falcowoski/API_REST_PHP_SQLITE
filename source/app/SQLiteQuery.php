@@ -15,30 +15,31 @@ class SQLiteQuery {
         while($rows = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $reg[] = $rows;
         }
+        // print json_encode($reg);
         return $reg;
     }
 
     public function Get() {
-        $stmt = $this->pdo->query('SELECT * FROM registros');
-        $reg = GetFetch($stmt);
+        $stmt = $this->pdo->query("SELECT * FROM registros");
+        $reg = $this->GetFetch($stmt);
         return $reg;
     }
 
     public function GetType($type) {
         $stmt = $this->pdo->query("SELECT * FROM registros WHERE type = '$type'");
-        $reg = GetFetch($stmt);
+        $reg = $this->GetFetch($stmt);
         return $reg;
     }
 
     public function GetDeleted($deleted) {
         $stmt = $this->pdo->query("SELECT * FROM registros WHERE deleted = '$deleted'");
-        $reg = GetFetch($stmt);
+        $reg = $this->GetFetch($stmt);
         return $reg;
     }
 
     public function GetTypeAndDeleted($type, $deleted) {
         $stmt = $this->pdo->query("SELECT * FROM registros WHERE type = '$type' AND deleted = '$deleted'");
-        $reg = GetFetch($stmt);
+        $reg = $this->GetFetch($stmt);
         return $reg;
     }
 }
